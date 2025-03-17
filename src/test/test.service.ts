@@ -18,7 +18,7 @@ export class TestService {
     return `This action returns test3`;
   }
 
-  //@TestDecorator()
+  @TestDecorator()
   remove(id: string) {
     return `This action returns test4, el id pasado es: ${id}`;
   }

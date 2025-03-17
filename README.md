@@ -12,7 +12,7 @@
 # Ejecutar en desarrollo
 1. Clonar el repositorio y asignamos al nuevo repo ya creado en git
 ```bash
-git clone https://github.com/martinprado1000/nest-10-plantilla.git nuevoNombre
+git clone https://github.com/martinprado1000/nest-11-plantilla.git nuevoNombre
 
 git remote set-url origin https://github.com/martinprado1000/nuevoNombre.git
 ```
@@ -78,23 +78,24 @@ http://localhost:3000/api#
 
 Configuraciones:
 
-* Entidades: User, Auth, Logger
+* Entidades: User, Auth, Logger, AuditLog
 
-* Autenticacion y autorizacion. Recibe roles, string o arreglo: SUPERADMIN, ADMIN, OPERATOR, USER.
+* Entidad Auth. Recibe roles, string o arreglo: SUPERADMIN, ADMIN, OPERATOR, USER.<br>
+-Decorar el controller con: @Auth(ValidRoles.XXX, ValidRoles.XXX)
+
+* AuditLog. Esta creada la entidad pero no esta implementado el sistema de auditoria, eso esta en la plantilla 12.
 
 * .env  .env.template  .env.prod.
 
 * ConfigModule,ConfigService,Joi.
 
-* Logger Winston. Ejemplo en el metodo /users/delete.
+* Logger Winston.
 
 * CorrelationId.
 
 * Swagger.
 
 * Patrón repository implementado en la entidad de users. Si por .env pasamos el valor 'mongo' en persistence usa el repository de mongo, de lo contrario usa el repository sql (No esta configurado como db sql)
-
-* Corrección de configuración de middleware, agregar todas la rutas en la configuracion.
 
 * Si ejecuto en mode dev solo esta dockerizada la db. 
 

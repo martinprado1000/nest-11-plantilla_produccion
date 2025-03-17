@@ -56,7 +56,7 @@ export class SeedService {
   private async insertUserData() {
     const seedUsers = initialData.users;
     seedUsers.forEach((user) => {
-      this.usersService.create(user);
+      this.usersService.create(user); 
     });
     return 'Usuarios creados con éxito';
   }

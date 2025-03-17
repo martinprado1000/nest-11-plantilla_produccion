@@ -22,7 +22,6 @@ import { CorrelationIdMiddleware, } from './common/middlewares/correlation-id.mi
 import { Request } from 'express';
 //import { LoggerModule } from 'nestjs-pino';
 import { TestModule } from './test/test.module';
-import { ResolveEntityModule } from './common/decorators/resolve-entity.module';
 
 @Module({
   imports: [
@@ -88,15 +87,13 @@ import { ResolveEntityModule } from './common/decorators/resolve-entity.module';
 
     TestModule,
 
-    ResolveEntityModule,
-
   ]
   
 })
 
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(CorrelationIdMiddleware).forRoutes('*');
+    consumer.apply(CorrelationIdMiddleware).forRoutes('*'); 
   }
 }
 // Se reemplazo la config de middleware en la nueve version. Hay que agregar todas las rutas para que no lance el WARN

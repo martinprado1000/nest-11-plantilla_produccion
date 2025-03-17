@@ -13,7 +13,7 @@ export class SeedController {
   @ApiResponse({ status: 200, description: 'Seed executed'}) // Type es lo que retorna
   @ApiResponse({ status: 403, description: 'Forbidden, token related' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
-  @Auth(ValidRoles.SUPERADMIN)
+  //@Auth(ValidRoles.SUPERADMIN)
   executeSeed() {
     return this.seedService.runSeed();
   }

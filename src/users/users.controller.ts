@@ -19,11 +19,7 @@ import { idMongoPipe } from '../common/pipes/idMongo.pipe';
 import { ValidRoles } from 'src/auth/interfaces';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 
-import { AuditInterceptor } from 'src/common/decorators/audit.interceptor';
-import { Audit } from 'src/common/decorators/audit.decorator';
-
 //@ApiTags('Asi podria cambiar el titulo de estos endpoints de Swager') //Swagger: @ApiTags= Asi podria cambiar el titulo de estos endpoints, si no tomo el nomber del endpoint.
-@UseInterceptors(AuditInterceptor)
 @Controller('users')
 export class UsersController {
   constructor(
@@ -65,7 +61,6 @@ export class UsersController {
   @ApiResponse({ status: 400, description: 'Bad request' })
   @ApiResponse({ status: 403, description: 'Forbidden, token related' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
-  @Audit()
   @Auth(ValidRoles.SUPERADMIN, ValidRoles.ADMIN)
   async create(
     @Body() createUserDto: CreateUserDto,
@@ -80,7 +75,6 @@ export class UsersController {
   @ApiResponse({ status: 404, description: 'Not Found' })
   @ApiResponse({ status: 403, description: 'Forbidden, token related' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
-  @Audit()
   @Auth(ValidRoles.SUPERADMIN, ValidRoles.ADMIN)
   async update(
     @Param('id', idMongoPipe) id: string,
@@ -97,7 +91,6 @@ export class UsersController {
   @ApiResponse({ status: 404, description: 'Not Found' })
   @ApiResponse({ status: 403, description: 'Forbidden, token related' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
-  @Audit()
   @Auth(ValidRoles.SUPERADMIN, ValidRoles.ADMIN)
   @HttpCode(204) // Si retorno un codigo 204 por mas que haga un return no retorna nada, si retorna las excepciones.
   async remove(
