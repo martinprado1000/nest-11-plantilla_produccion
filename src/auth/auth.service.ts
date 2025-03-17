@@ -13,7 +13,6 @@ import { LoginUserDto } from './dto/login-user.dto';
 import { User } from '../users/schemas/user.schema';
 import { UsersService } from '../users/users.service';
 import { CreateUserDto, ResponseUserDto } from '../users/dto';
-import { response } from 'express';
 
 @Injectable()
 export class AuthService {
@@ -73,14 +72,5 @@ export class AuthService {
     const token = this.jwtService.sign(payload);
     return token;
   }
-
-  // private handleDBErrors(error: any): never {
-  //   // Esta funcion retorna never porque nunca va a retornar nada. Solo puede lanzar una axection.
-  //   if (error.code === 11000)
-  //     throw new BadRequestException(
-  //       `El usuario ${JSON.stringify(error.keyValue.email)} ya existe`,
-  //     );
-  //   throw new InternalServerErrorException('Please check server logs');
-  // }
   
 }
