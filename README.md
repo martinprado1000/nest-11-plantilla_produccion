@@ -12,7 +12,7 @@
 # Ejecutar en desarrollo
 1. Clonar el repositorio y asignamos al nuevo repo ya creado en git
 ```bash
-git clone https://github.com/martinprado1000/nest-11-plantilla.git nuevoNombre
+git clone https://github.com/martinprado1000/nest-11-plantilla_produccion.git nuevoNombre
 
 git remote set-url origin https://github.com/martinprado1000/nuevoNombre.git
 ```
