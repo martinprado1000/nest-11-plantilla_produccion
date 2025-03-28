@@ -1,9 +1,9 @@
 import { Expose, Transform } from 'class-transformer';
-import { Role } from '../enums/role.enums';
+import { Role } from 'src/users/enums/role.enums';
 export class ResponseUserDto {
 
   @Expose()
-  @Transform(({ obj }) => obj._id.toString()) // Transforma `_id` a `id` como string
+  @Transform(({ obj }) => obj._id.toString())
   id: string;
 
   @Expose()

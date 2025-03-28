@@ -1,14 +1,14 @@
 import {
   Injectable,
 } from '@nestjs/common';
-
 import { InjectModel } from '@nestjs/mongoose';
-import { Document as DocumentMongoose, isValidObjectId, Model } from 'mongoose';
 
-import { User } from './schemas/user.schema';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
-import { UsersRepositoryInterface } from './interfaces/users-repository.interface';
+import { Document as DocumentMongoose, Model } from 'mongoose';
+
+import { User } from 'src/users/schemas/user.schema';
+import { CreateUserDto } from 'src/users/dto/create-user.dto';
+import { UpdateUserDto } from 'src/users/dto/update-user.dto';
+import { UsersRepositoryInterface } from 'src/users/interfaces/users-repository.interface';
 
 @Injectable()
 export class UsersRepository implements UsersRepositoryInterface {
@@ -20,7 +20,7 @@ export class UsersRepository implements UsersRepositoryInterface {
   async findAll(limit: number, offset: number): Promise<User[]> {
     return await this.userModel
       .find()
-      .skip(offset) // Salta los primeros `offset` registros
+      .skip(offset)
       .limit(limit);
   }
 
@@ -42,7 +42,7 @@ export class UsersRepository implements UsersRepositoryInterface {
   // -----------UPDATE-------------------------------------------------------------------------------
   async update(id: string, updateUserDto: UpdateUserDto): Promise<User | null> {
     return await this.userModel.findByIdAndUpdate(id, updateUserDto, {
-      new: true, // new:true : retorna el nuevo valor ya editado.
+      new: true,
     });
   }
 
@@ -51,13 +51,11 @@ export class UsersRepository implements UsersRepositoryInterface {
     return await this.userModel.findByIdAndDelete(id);
   }
 
-  // -----------DELETE ALL USERS-------------------------------------------------------------------------------
-  // Elimina todos los usuarios para poder eliminar la coleccion.
+  // -----------DELETE ALL USERS---------------------------------------------------------------------
   async deleteAllUsers() {
     await this.userModel.deleteMany();
   }
-  // -----------DELETE COLLECTION USERS-------------------------------------------------------------------------------
-  // Elimina la colleción users.
+  // -----------DELETE COLLECTION USERS--------------------------------------------------------------
   async deleteUsersCollection() {
     await this.userModel.collection.drop();
   }

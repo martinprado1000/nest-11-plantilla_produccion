@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import { AuditLogs, AuditLogsSchema } from './schema/auditLogs.schema';
-import { AuditLogsService } from './auditLogs.service';
-import { AuditLogsController } from './auditLogs.controller';
+
+import { AuditLogsController } from 'src/auditLogs/auditLogs.controller';
+import { AuditLogsService } from 'src/auditLogs/auditLogs.service';
+import { AuditLogs, AuditLogsSchema } from 'src/auditLogs/schema/auditLogs.schema';
 import { USERS_REPOSITORY_INTERFACE } from 'src/users/interfaces/users-repository.interface';
 import { AuditLogsRepository } from './auditLogs.repository';
-import { ConfigModule } from '@nestjs/config';
 
 @Module({
 
@@ -13,7 +14,7 @@ import { ConfigModule } from '@nestjs/config';
 
   providers: [
     AuditLogsService,
-    AuditLogsRepository, // Inyectamos la dependencia del repositorio indicandole que clase usar cuando llame a la interface USERS_REPOSITORY
+    AuditLogsRepository,
     {
       provide: USERS_REPOSITORY_INTERFACE,
       useClass: AuditLogsRepository,

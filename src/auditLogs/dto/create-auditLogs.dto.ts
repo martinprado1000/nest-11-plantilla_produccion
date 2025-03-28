@@ -10,20 +10,20 @@ export class CreateAuditLogsDto {
     @ApiProperty({
       description: 'Mongo Id (unique)',
       type: 'string',
-      nullable: true, // True porque viene siempre nulo
+      nullable: true,
       example: "67a1a6c23504ec3e184cc14a",
     })
     @IsOptional()
     @IsMongoId()
     @Transform(({ value }) =>
       Types.ObjectId.isValid(value) ? value.toString() : value,
-    ) // Convierte a string si es un ObjectId, se hace para evitar problemas futuros.
+    )
     _id?: string;
 
   @ApiProperty({
     description: 'Executed entity',
     type: string,
-    nullable: false, // no puede venir nulo
+    nullable: false,
     example: 'Audit',
   })
   @IsString()
@@ -33,7 +33,7 @@ export class CreateAuditLogsDto {
   @ApiProperty({
     description: 'Id Executed entity',
     type: string,
-    nullable: false, // no puede venir nulo
+    nullable: false,
     example: '67a1a6c23504ec3e184cc14b',
   })
   @IsString()
@@ -43,7 +43,7 @@ export class CreateAuditLogsDto {
   @ApiProperty({
     description: 'Executed method',
     type: string,
-    nullable: false, // no puede venir nulo
+    nullable: false,
     example: 'CREATE',
   })
   @IsString()
@@ -53,7 +53,7 @@ export class CreateAuditLogsDto {
   @ApiProperty({
     description: 'Id Executed user or Registratión for user',
     type: string,
-    nullable: true, // no puede venir nulo
+    nullable: true,
     example: '67a1a6c23504ec3e184cc14b || Registración por usuario',
     default: 'Registración por usuario',
   })
@@ -62,12 +62,12 @@ export class CreateAuditLogsDto {
   @Transform(({ value }) =>
     value === undefined ? 'Registración por usuario' : value,
   )
-  userIdAction: string | undefined; // Puede ser undefined porque si es un register no hay usuario registrado
+  userIdAction: string | undefined;
 
   @ApiProperty({
     description: 'Original data or NULL',
     type: object,
-    nullable: false, // no puede venir nulo
+    nullable: false,
     example: `{"id":"67c61d27fd44754b9f6a4435","name":"nameTest","lastname":"lastnameTest","email":"test@test.com","roles":["ADMIN"],"isActive":true} || NULL`,
   })
   @IsObject()
@@ -76,7 +76,7 @@ export class CreateAuditLogsDto {
   @ApiProperty({
     description: 'Edited data',
     type: object,
-    nullable: true, // no puede venir nulo
+    nullable: true,
     example: `{"id":"67c61d27fd44754b9f6a4435","name":"nameTest1","lastname":"lastnameTest1","email":"test1@test.com","roles":["USER"],"isActive":true}`,
   })
   @IsObject()

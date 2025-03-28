@@ -1,16 +1,15 @@
 import { Controller, Get } from '@nestjs/common';
-import { SeedService } from './seed.service';
-import { Auth, GetUser, RoleProtected } from '../auth/decorators';
-import { ValidRoles } from '../auth/interfaces';
-import { User } from 'src/users/schemas/user.schema';
 import { ApiResponse } from '@nestjs/swagger';
+import { SeedService } from './seed.service';
+import { Auth } from 'src/auth/decorators';
+import { ValidRoles } from 'src/auth/interfaces';
 
 @Controller('seed')
 export class SeedController {
   constructor(private readonly seedService: SeedService) {}
 
   @Get('executeSeed')
-  @ApiResponse({ status: 200, description: 'Seed executed'}) // Type es lo que retorna
+  @ApiResponse({ status: 200, description: 'Seed executed'})
   @ApiResponse({ status: 403, description: 'Forbidden, token related' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   //@Auth(ValidRoles.SUPERADMIN)

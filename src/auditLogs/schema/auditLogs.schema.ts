@@ -1,16 +1,15 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { CreateAuditLogsDto } from '../dto/create-auditLogs.dto';
-import { Action } from '../enums/action.enums';
-import { ApiProperty } from '@nestjs/swagger';
-
-//export type AuditDocument = HydratedDocument<Audit>;
+import { CreateAuditLogsDto } from 'src/auditLogs/dto/create-auditLogs.dto';
+import { Action } from 'src/auditLogs/enums/action.enums';
 
 @Schema({
   timestamps: true,
 })
 export class AuditLogs extends Document {
-  @ApiProperty({// Swagger: agrega este dato a la respuesta del endpoint
+
+  @ApiProperty({
     description: 'Entity afected',
     example: 'UserController',
     required: true,

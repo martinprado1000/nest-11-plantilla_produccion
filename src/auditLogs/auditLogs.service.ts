@@ -1,11 +1,11 @@
-import { Inject, Injectable, UseInterceptors } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
-import { CreateAuditLogsDto } from './dto/create-auditLogs.dto';
+import { CreateAuditLogsDto } from 'src/auditLogs/dto/create-auditLogs.dto';
 import {
   AUDITLOG_REPOSITORY_INTERFACE,
   AuditLogsRepositoryInterface,
-} from './interfaces/auditLogs-repository.interface';
+} from 'src/auditLogs/interfaces/auditLogs-repository.interface';
 import { PaginationDto } from 'src/common/dtos/pagination.dto';
 
 @Injectable()
@@ -22,7 +22,6 @@ export class AuditLogsService {
   ) {
     this.defaultLimit = configService.get<number>('pagination.defaultLimit', 3);
   }
-  //: Promise<CreateAuditLogsDto>
   async create(createAuditLogsDto: CreateAuditLogsDto) {
     const res =  await this.auditLogsRepository.create(createAuditLogsDto);
     return res;

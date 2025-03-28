@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import {
   IsString,
   IsNotEmpty,
@@ -10,31 +11,29 @@ import {
   IsMongoId
 } from 'class-validator';
 import { Transform } from 'class-transformer';
-import { Role } from '../enums/role.enums';
 import { Types } from 'mongoose';
-import { ApiProperty } from '@nestjs/swagger';
-import { array, boolean, string } from 'joi';
+import { Role } from 'src/users/enums/role.enums';
 
 export class CreateUserDto {
 
   @ApiProperty({
     description: 'Mongo Id (unique)',
     type: 'string',
-    nullable: true, // True porque viene siempre nulo
+    nullable: true,
     example: "67a1a6c23504ec3e184cc14a",
   })
   @IsOptional()
   @IsMongoId()
   @Transform(({ value }) =>
     Types.ObjectId.isValid(value) ? value.toString() : value,
-  ) // Convierte a string si es un ObjectId, se hace para evitar problemas futuros.
+  )
   _id?: string;
 
   @ApiProperty({
     description: 'User name',
     type: 'string',
     minLength: 2,
-    nullable: false, // no puede venir nulo
+    nullable: false,
     example: 'Richard'
   })
   @IsString()
@@ -78,7 +77,6 @@ export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
   @MinLength(6)
-  //@Matches(/^[^\s]+$/, { message: 'The password must not contain spaces' })
   @Matches(/^\S*$/, { message: 'La contraseña no debe contener espacios' })
   @Matches(/(?:(?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
     message:
@@ -95,7 +93,6 @@ export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
   @MinLength(6)
-  //@Matches(/^[^\s]+$/, { message: 'The confirm password must not contain spaces' }) // Esta permite 123456
   @Matches(/^\S*$/, {
     message: 'La confirmación de contraseña no debe contener espacios',
   })
@@ -114,16 +111,16 @@ export class CreateUserDto {
   })
   @IsOptional()
   @IsEnum(Role, { each: true })
-  @Transform(({ value }) => value ?? [Role.USER]) // Si no viene un Role le asigna el rol USER al dto para que no pueda ser undefined cuando lo usemos.
+  @Transform(({ value }) => value ?? [Role.USER])
   @Transform(({ value }) => {
-    if (!value) return undefined; // Si no hay valor, retorna undefined (evita errores)
+    if (!value) return undefined;
     if (typeof value === 'string') {
-      return [value.toUpperCase()]; // Convierte un string en un array con mayúsculas
+      return [value.toUpperCase()];
     }
     if (Array.isArray(value)) {
-      return value.map((v) => (typeof v === 'string' ? v.toUpperCase() : v)); // Convierte cada string dentro del array a mayúsculas
+      return value.map((v) => (typeof v === 'string' ? v.toUpperCase() : v));
     }
-    return value; // Si es otro tipo de dato, lo deja igual (para validaciones posteriores)
+    return value;
   })
   roles?: Role[] | Role;
 

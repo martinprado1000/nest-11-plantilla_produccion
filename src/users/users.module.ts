@@ -1,15 +1,17 @@
 import { forwardRef, Module } from '@nestjs/common';
-import { UsersController } from './users.controller';
-import { UsersService } from './users.service';
 import { MongooseModule } from '@nestjs/mongoose';
-import { User, UserSchema } from './schemas/user.schema';
-import { CustomLoggerService } from '../logger/logger.service';
 import { ConfigModule} from '@nestjs/config';
-import { AuthModule } from '../auth/auth.module';
-import { UsersRepository } from './users.repository';
+
+import { UsersController } from 'src/users/users.controller';
+import { UsersService } from 'src/users/users.service';
+import { User, UserSchema } from 'src/users/schemas/user.schema';
+import { UsersRepository } from 'src/users/users.repository';
 import {
   USERS_REPOSITORY_INTERFACE,
-} from './interfaces/users-repository.interface';
+} from 'src/users/interfaces/users-repository.interface';
+
+import { CustomLoggerService } from 'src/logger/logger.service';
+import { AuthModule } from 'src/auth/auth.module';
 import { AuditLogsModule } from 'src/auditLogs/auditLogs.module';
 
 @Module({
@@ -19,7 +21,7 @@ import { AuditLogsModule } from 'src/auditLogs/auditLogs.module';
   providers: [ 
     UsersService,
     CustomLoggerService,
-    UsersRepository,// Inyectamos la dependencia del repositorio indicandole que clase usar cuando llame a la interface USERS_REPOSITORY
+    UsersRepository,
     {
       provide: USERS_REPOSITORY_INTERFACE,
       useClass: UsersRepository 
@@ -27,9 +29,9 @@ import { AuditLogsModule } from 'src/auditLogs/auditLogs.module';
   ],
   
   imports: [
-    MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]), // Le indico al modulo el nombre y el esquema que va a usar
+    MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
     ConfigModule, 
-    forwardRef(() => AuthModule), // forwardRef: Como el modulo Users depende del de Auth tengo que importarlo con forwardRef para solucionar la dependencia circular
+    forwardRef(() => AuthModule),
     AuditLogsModule
   ],
 

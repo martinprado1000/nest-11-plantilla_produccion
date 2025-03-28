@@ -1,5 +1,3 @@
-// process.env.PASSWORD_SEED_USERS no está disponible en el momento en que se ejecuta este archivo por lo tanto las variable de entorno son undefined.
-// De la siguiente manera cargamos las env antes.
 import * as dotenv from 'dotenv';
 dotenv.config();
 import { ConfigService } from '@nestjs/config';

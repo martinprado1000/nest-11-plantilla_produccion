@@ -1,6 +1,6 @@
-import { CreateUserDto, UpdateUserDto } from "../dto";
-import { User } from "../schemas/user.schema";
 import { Document as DocumentMongoose } from 'mongoose';
+import { CreateUserDto, UpdateUserDto } from "src/users/dto";
+import { User } from "src/users/schemas/user.schema";
 
 export const USERS_REPOSITORY_INTERFACE = 'UsersRepositoryInterface';
 

@@ -1,13 +1,13 @@
 import { applyDecorators, UseGuards } from '@nestjs/common';
+
 import { AuthGuard } from '@nestjs/passport';
-import { UserRoleGuard } from '../guards/user-role.guard';
-import { ValidRoles } from '../interfaces';
-import { RoleProtected } from './role-protected.decorator';
+import { UserRoleGuard } from 'src/auth/guards/user-role.guard';
+import { ValidRoles } from 'src/auth/interfaces';
+import { RoleProtected } from 'src/auth/decorators/role-protected.decorator';
 
-// Decorador de metodo o global para unir los decoradores que necesitemos
-export function Auth(...roles: ValidRoles[]) { // El primer parametro son los datos que nos le pasan a este decorador.
+export function Auth(...roles: ValidRoles[]) {
 
-  return applyDecorators( // applyDecorators: Para unis decoradores tengo que retornar applyDecorators con los decoradores deseados.
+  return applyDecorators(
     RoleProtected(...roles),
     UseGuards( AuthGuard(), UserRoleGuard ),
   );

@@ -3,11 +3,11 @@ import {
 } from '@nestjs/common';
 
 import { InjectModel } from '@nestjs/mongoose';
-import { Document as DocumentMongoose, isValidObjectId, Model } from 'mongoose';
+import { Document as DocumentMongoose, Model } from 'mongoose';
 
-import { AuditLogsRepositoryInterface } from './interfaces/auditLogs-repository.interface';
-import { AuditLogs } from './schema/auditLogs.schema';
-import { CreateAuditLogsDto } from './dto/create-auditLogs.dto';
+import { AuditLogsRepositoryInterface } from 'src/auditLogs/interfaces/auditLogs-repository.interface';
+import { AuditLogs } from 'src/auditLogs/schema/auditLogs.schema';
+import { CreateAuditLogsDto } from 'src/auditLogs/dto/create-auditLogs.dto';
 
 @Injectable()
 export class AuditLogsRepository implements AuditLogsRepositoryInterface {
@@ -24,7 +24,7 @@ export class AuditLogsRepository implements AuditLogsRepositoryInterface {
   async findAll(limit: number, offset: number): Promise<AuditLogs[]> {
     return await this.auditLogsModel
       .find()
-      .skip(offset) // Salta los primeros `offset` registros
+      .skip(offset)
       .limit(limit);
   }
 

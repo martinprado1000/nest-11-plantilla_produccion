@@ -1,4 +1,4 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'; // SchemaFactory: crea el modelo del schema
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 import { Role } from '../enums/role.enums';
 import { ApiProperty } from '@nestjs/swagger';
@@ -7,15 +7,16 @@ import { ApiProperty } from '@nestjs/swagger';
   timestamps: true,
 })
 export class User extends Document {
-  @ApiProperty({ // Swagger: agrega este dato a la respuesta del endpoint
+  
+  @ApiProperty({
     description: 'User name',
     example: 'Richard',
     required: true,
   })
-  @Prop({  // Esto le indica que es una propiedad del documento
+  @Prop({
     trim: true,
     required: true,
-    set: (value: string) => { // Capitaliza antes de gurdar.
+    set: (value: string) => {
       if (!value) return value;
       return value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
     },
@@ -91,9 +92,4 @@ export class User extends Document {
   isActive: boolean;
 }
 
-export const UserSchema = SchemaFactory.createForClass(User); // SchemaFactory.createForClass: esto es lo que crea el modelo con el nombre user.
-
-// Recordar importar el schema en el modulo:
-// imports: [
-//   MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]), // Le indico al modulo el nombre y el esquema que va a usar
-// ],
+export const UserSchema = SchemaFactory.createForClass(User); 
