@@ -82,6 +82,7 @@ export class UsersController {
   @ApiResponse({ status: 204, description: 'User password was recovered'})
   @ApiResponse({ status: 400, description: 'Bad request' })
   @ApiResponse({ status: 404, description: 'Not Found' })
+  @HttpCode(204)
   async recoveryPassword(
     @Body() EmailUserDto: EmailUserDto,
   ) {

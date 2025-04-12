@@ -53,7 +53,7 @@ import { CorrelationIdMiddleware, } from 'src/common/middlewares/correlation-id.
       transport: {
         host: 'smtp.gmail.com',
         port: 587,
-        secure: false, // upgrade later with STARTTLS
+        secure: false,
         auth: {
           user: "martinprado1000@gmail.com",
           pass: "ktrv czmi swtr rzob",

@@ -156,8 +156,8 @@ export class UsersService {
     updateUserDto: UpdateUserDto,
     activeUser: CreateUserDto | null,
   ): Promise<ResponseUserDto> {
-    // Si activeUser es igual a null significa que viene de recoveryPassword
-    if (activeUser !== null)
+    // Si activeUser no existe significa que viene de recoveryPassword
+    if (activeUser)
       await this.canEdit(id, activeUser, updateUserDto.roles);
 
     let { password, confirmPassword } = updateUserDto;
@@ -190,6 +190,7 @@ export class UsersService {
       },
     );
 
+    if (activeUser) // Si NO existe activeUser loggeo la acción en recovery password
     this.logger.http(
       UsersService.name,
       `Usuario ${activeUser?._id} editó al usuario ${id}`,
@@ -259,7 +260,7 @@ export class UsersService {
       this.logger.http(
         UsersService.name,
         `Usuario ${emailUserDto.email} restableció su contraseña`,
-        `PATCH/${userFound.id}`,
+        `PATCH/recoveryPassword`,
       );
 
       return { message: `Usuario: ${emailUserDto.email} restableció su contraseña`};

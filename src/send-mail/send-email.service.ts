@@ -20,8 +20,8 @@ export class SendEmailService {
             </div>`,
       })
       .then((success) => {
-        console.log(success);
-        return 'enviado';
+        //console.log(success);
+        return "enviado";
       })
       .catch((err) => {
         console.log(err);
