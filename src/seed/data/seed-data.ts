@@ -26,39 +26,39 @@ interface SeedData {
 export const initialData: SeedData = {
     users: [
         {   
-            name: 'Test_superadmin_name',
-            lastname: 'Test superadmin lastname',
+            name: 'TestSuperadminName',
+            lastname: 'TestSuperadminLastname',
             email: 'superadmin@google.com',
             password: passwordSeedUsers,
             confirmPassword: passwordSeedUsers,
-            roles: [Role.SUPERADMIN],
+            roles: Role.SUPERADMIN,
             isActive: true
         },
         {
-            name: 'Test_admin_name',
-            lastname: 'Test admin lastname',
+            name: 'TestAdminName',
+            lastname: 'TestAdminLastname',
             email: 'admin@google.com',
             password: passwordSeedUsers,
             confirmPassword: passwordSeedUsers,
-            roles: [Role.ADMIN],
+            roles: Role.ADMIN,
             isActive: true
         },
         {
-            name: 'Test_operator_name',
-            lastname: 'Test operator lastname',
+            name: 'TestOperatorName',
+            lastname: 'TestOperatorLastname',
             email: 'operator@google.com',
             password: passwordSeedUsers,
             confirmPassword: passwordSeedUsers,
-            roles: [Role.OPERATOR],
+            roles: Role.OPERATOR,
             isActive: true
         },
         {
-            name: 'Test_user_name',
-            lastname: 'Test user lastname',
+            name: 'TestUserName',
+            lastname: 'TestUserLastname',
             email: 'user@google.com',
             password: passwordSeedUsers,
             confirmPassword: passwordSeedUsers,
-            roles: [Role.USER],
+            roles: Role.USER,
             isActive: true
         }
     ]

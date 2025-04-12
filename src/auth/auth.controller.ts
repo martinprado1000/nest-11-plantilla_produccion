@@ -23,8 +23,8 @@ export class AuthController {
   @Post('register')
   @ApiResponse({ status:201, description: 'User was registered', type: User })
   @ApiResponse({ status:400, description: 'Bad request' })
-  registerUser(@Body() createUserDto: CreateUserDto) {
-    return this.authService.register(createUserDto);
+  async registerUser(@Body() createUserDto: CreateUserDto) {
+    return await this.authService.register(createUserDto);
   }
 
   @Post('login')

@@ -6,6 +6,7 @@ export const USERS_REPOSITORY_INTERFACE = 'UsersRepositoryInterface';
 
 export interface UsersRepositoryInterface {
     findAll(limit:number, offset:number):Promise<User[]>;
+    findAllActiveUsers(limit:number, offset:number):Promise<User[]>;
     findById(id: string): Promise<DocumentMongoose | null>;
     findeByEmail(email: string): Promise<DocumentMongoose | null>;
     create(createUserDto: CreateUserDto): Promise<User>;

@@ -24,6 +24,14 @@ export class UsersRepository implements UsersRepositoryInterface {
       .limit(limit);
   }
 
+  // -----------FIND ALL USERS ACTIVE--------------------------------------------------------------------
+  async findAllActiveUsers(limit: number, offset: number): Promise<User[]> {
+    return await this.userModel
+      .find({ isActive: true }) // solo usuarios activos
+      .skip(offset)
+      .limit(limit);
+  }
+
   // -----------FIND BY ID-------------------------------------------------------------------------------
   async findById(id: string): Promise<DocumentMongoose | null> {
     return await this.userModel.findById(id).lean() ;

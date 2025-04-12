@@ -39,7 +39,7 @@ export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
   @MinLength(2)
-  @Matches(/^[^\s]+$/, { message: 'The name must not contain spaces' })
+  @Matches(/^[^\s]+$/, { message: 'El nombre no puede contener espacioss' })
   @Transform(({ value }) => capitalize(value))
   name: string;
 
@@ -53,7 +53,7 @@ export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
   @MinLength(2)
-  @Matches(/^[^\s]+$/, { message: 'The lastname must not contain spaces' })
+  @Matches(/^[^\s]+$/, { message: 'El apellido no puede contener espacios' })
   @Transform(({ value }) => capitalize(value))
   lastname: string;
 
@@ -75,8 +75,8 @@ export class CreateUserDto {
     example: 'Test123##'
   })
   @IsString()
-  @IsNotEmpty()
-  @MinLength(6)
+  @IsNotEmpty({ message: 'La contraseña es obligatoria' })
+  @MinLength(8, { message: 'La contraseña debe tener al menos 8 caracteres' })
   @Matches(/^\S*$/, { message: 'La contraseña no debe contener espacios' })
   @Matches(/(?:(?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
     message:
@@ -91,14 +91,10 @@ export class CreateUserDto {
     example: 'Test123##'
   })
   @IsString()
-  @IsNotEmpty()
-  @MinLength(6)
+  @IsNotEmpty({ message: 'La contraseña es obligatoria' })
+  @MinLength(8, { message: 'La contraseña debe tener al menos 8 caracteres' })
   @Matches(/^\S*$/, {
     message: 'La confirmación de contraseña no debe contener espacios',
-  })
-  @Matches(/(?:(?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
-    message:
-      'La confirmación de contraseña debe tener una letra mayúscula, minúscula y un número.',
   })
   confirmPassword: string;
 

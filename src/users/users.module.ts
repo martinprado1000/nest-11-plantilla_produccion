@@ -13,6 +13,7 @@ import {
 import { CustomLoggerService } from 'src/logger/logger.service';
 import { AuthModule } from 'src/auth/auth.module';
 import { AuditLogsModule } from 'src/auditLogs/auditLogs.module';
+import { SendEmailModule } from 'src/send-mail/send-email.module';
 
 @Module({
 
@@ -32,7 +33,8 @@ import { AuditLogsModule } from 'src/auditLogs/auditLogs.module';
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
     ConfigModule, 
     forwardRef(() => AuthModule),
-    AuditLogsModule
+    AuditLogsModule,
+    SendEmailModule,
   ],
 
   exports: [UsersService],

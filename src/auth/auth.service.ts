@@ -25,12 +25,14 @@ export class AuthService {
 
   // -----------REGISTER-------------------------------------------------------------------------------
   async register(createAuthDto: CreateUserDto) {
-    if (JSON.stringify(createAuthDto.roles) !== JSON.stringify([Role.USER])) {
+    if (
+      Array.isArray(createAuthDto.roles) &&   // Se fija si roles es un array (o sea, si viene).
+      JSON.stringify(createAuthDto.roles) !== JSON.stringify([Role.USER]) // Se fija si es distinto a USER
+    ) {
       throw new BadRequestException(
         'Operación no permitida: Solo se pueden registrar usuarios de tipo: USER',
       );
     }
-
     const userResponse = await this.userService.create(createAuthDto);
 
     return {
@@ -47,10 +49,12 @@ export class AuthService {
     const user = await this.userService.findOne(email);
 
     if (user?.isActive === false)
-      throw new UnauthorizedException('User is inactive, talk with an admin');
+      throw new UnauthorizedException(
+        'Usuario inactivo, comuniquese con el administrador',
+      );
 
     if (!bcrypt.compareSync(password, user.password))
-      throw new UnauthorizedException('Credential are not valid (password)');
+      throw new UnauthorizedException('Usuario o contraseña incorrecta');
 
     userResponse = plainToInstance(ResponseUserDto, user, {
       excludeExtraneousValues: true,
