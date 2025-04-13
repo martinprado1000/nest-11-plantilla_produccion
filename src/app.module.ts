@@ -3,7 +3,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { MailerModule } from '@nestjs-modules/mailer';
-import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 
 import { WinstonModule } from 'nest-winston';
 import { join } from 'path';
@@ -21,6 +20,7 @@ import { SeedModule } from 'src/seed/seed.module';
 import { AuditLogsModule } from 'src/auditLogs/auditLogs.module';
 import { SendEmailModule } from './send-mail/send-email.module';
 import { CorrelationIdMiddleware, } from 'src/common/middlewares/correlation-id.middleware';
+import { mailerConfigFactory } from './appConfig/mailer.config';
 //import { CommonModule } from 'src/common/common.module';
 //import { LoggerModule } from 'src/logger/logger.module';
 
@@ -49,19 +49,10 @@ import { CorrelationIdMiddleware, } from 'src/common/middlewares/correlation-id.
       rootPath: join(__dirname,'..','public'), 
     }),
 
-    MailerModule.forRoot({
-      transport: {
-        host: 'smtp.gmail.com',
-        port: 587,
-        secure: false,
-        auth: {
-          user: "martinprado1000@gmail.com",
-          pass: "ktrv czmi swtr rzob",
-        },
-      },
-      defaults: {
-        from:'"nest-modules" <modules@nestjs.com>',
-      },
+    MailerModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: mailerConfigFactory,
     }),
 
     //CommonModule,
@@ -83,6 +74,12 @@ import { CorrelationIdMiddleware, } from 'src/common/middlewares/correlation-id.
 })
 
 export class AppModule implements NestModule {
+
+  constructor(private readonly configService: ConfigService) {
+    const appPort = this.configService.get<string>('APP_PORT');
+    console.log('Puerto de la app desde el .env:', appPort);
+  }
+
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(CorrelationIdMiddleware).forRoutes('*'); 
   }

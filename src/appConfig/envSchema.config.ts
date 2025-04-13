@@ -11,6 +11,10 @@ export const envSchema = Joi.object({
   DATABASE_USERNAME: Joi.string().allow('', null),
   DATABASE_PASSWORD: Joi.string().allow('', null),
   PAGINATIONS_DEFAULT_LIMIT: Joi.number().default(20), 
+  MAILER_HOST: Joi.string().required(),
+  MAILER_PORT: Joi.number().required(),
+  MAILER_USER: Joi.string().required(),
+  MAILER_PASS: Joi.string().required(),
   PASSWORD_SEED_USERS: Joi.string().required(),
   AUDIT: Joi.boolean().default(false),
 });

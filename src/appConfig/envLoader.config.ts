@@ -13,6 +13,12 @@ export const envLoader = () => ({
     pagination: {
         defaultLimit: Number(process.env.PAGINATIONS_DEFAULT_LIMIT)
     },
+    mailer: {
+        host: process.env.MAILER_HOST,
+        port: process.env.MAILER_PORT,
+        user: process.env.MAILER_USER,
+        pass: process.env.MAILER_PASS,
+    },
     passwordSeedUsers: process.env.PASSWORD_SEED_USERS,
-    audit: process.env.AUDIT
+    audit: process.env.AUDIT,
 })
