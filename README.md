@@ -78,10 +78,12 @@ http://localhost:3000/api#
 
 Configuraciones:
 
-* Entidades: User, Auth, Logger, AuditLog
+* Entidades: User, Auth, Logger, AuditLog, sendEmail
 
 * Entidad Auth. Recibe roles, string o arreglo: SUPERADMIN, ADMIN, OPERATOR, USER.<br>
 -Decorar el controller con: @Auth(ValidRoles.XXX, ValidRoles.XXX)
+
+* Para usar el decorador @GetUser(), antes tiene que pasar por el decorador @Auth(ValidRoles.XXX) Para poder obtener el usuario registrado.
 
 * AuditLog. Esta creada la entidad pero no esta implementado el sistema de auditoria, eso esta en la plantilla 12.
 

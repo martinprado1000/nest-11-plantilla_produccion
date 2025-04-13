@@ -27,7 +27,7 @@ import {
 import { CustomLoggerService } from 'src/logger/logger.service';
 import { PaginationDto } from 'src/common/dtos/pagination.dto';
 import { InjectModel } from '@nestjs/mongoose';
-import { SendEmailService } from 'src/send-mail/send-email.service';
+import { SendEmailService } from 'src/send-email/send-email.service';
 
 @Injectable()
 export class UsersService {

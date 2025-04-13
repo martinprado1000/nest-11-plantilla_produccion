@@ -18,9 +18,9 @@ import { AuthModule } from 'src/auth/auth.module';
 import { UsersModule } from 'src/users/users.module'; 
 import { SeedModule } from 'src/seed/seed.module';
 import { AuditLogsModule } from 'src/auditLogs/auditLogs.module';
-import { SendEmailModule } from './send-mail/send-email.module';
+import { SendEmailModule } from 'src/send-email/send-email.module';
 import { CorrelationIdMiddleware, } from 'src/common/middlewares/correlation-id.middleware';
-import { mailerConfigFactory } from './appConfig/mailer.config';
+import { mailerConfigFactory } from './appConfig/mailer.config'; 
 //import { CommonModule } from 'src/common/common.module';
 //import { LoggerModule } from 'src/logger/logger.module';
 

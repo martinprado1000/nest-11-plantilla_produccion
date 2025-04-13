@@ -13,7 +13,7 @@ import {
 import { CustomLoggerService } from 'src/logger/logger.service';
 import { AuthModule } from 'src/auth/auth.module';
 import { AuditLogsModule } from 'src/auditLogs/auditLogs.module';
-import { SendEmailModule } from 'src/send-mail/send-email.module';
+import { SendEmailModule } from 'src/send-email/send-email.module';
 
 @Module({
 
